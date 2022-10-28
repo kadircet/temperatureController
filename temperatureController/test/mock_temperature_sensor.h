@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "gmock/gmock.h"
-#include "temperature_sensor.h"
+#include "../src/temperature_sensor.h"
 
 class MockTemperatureSensor : public TemperatureSensor {
     public:

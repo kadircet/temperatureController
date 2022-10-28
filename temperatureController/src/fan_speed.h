@@ -4,15 +4,15 @@
 #include <iostream>
 #include "machine.h"
 
-enum eFanSpeedSettings {    eFAN_SPEED_OFF = 0, 
-                            eFAN_SPEED_LOW, 
-                            eFAN_SPEED_MID, 
-                            eFAN_SPEED_HIGH };
+enum class eFanSpeedSettings {	eFAN_SPEED_OFF = 0, 
+								eFAN_SPEED_LOW, 
+								eFAN_SPEED_MID, 
+								eFAN_SPEED_HIGH };
 
-enum eFanSpeedTemperatureRange {    eFAN_TEMP_STABILE = 0, 
-                                    eFAN_TEMP_LOW = 2, 
-                                    eFAN_TEMP_MID = 5, 
-                                    eFAN_TEMP_HIGH = 7};
+enum class eFanSpeedTemperatureRange {	eFAN_TEMP_STABILE = 0, 
+										eFAN_TEMP_LOW = 2, 
+										eFAN_TEMP_MID = 5, 
+										eFAN_TEMP_HIGH = 7};
 
 class FanSpeed {
     public:

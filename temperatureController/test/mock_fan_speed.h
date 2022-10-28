@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "gmock/gmock.h"
-#include "fan_speed.h"
+#include "../src/fan_speed.h"
 
 class MockFanSpeed : public FanSpeed {
     public:

@@ -14,31 +14,45 @@ void TemperatureController::mainController(void) {
 *	Compares the current room temperature with desired temperature and sets the state.
 */
 void TemperatureController::controlFan(void) {
-	if(currentStatus == HEATING_IN_PROGRESS) {
-		if(roomTemp >= (userSettings.setTemperature + DEFAULT_TEMPERATURE_HYSTERESIS)) {
-			currentStatus = COOLING_IN_PROGRESS;
-		}
-		else {
-			currentStatus = HEATING_IN_PROGRESS;
-		}
-	}
-	else if(currentStatus == COOLING_IN_PROGRESS) {
+	switch (currentStatus) {
+	case eCurrentStatus::COOLING_IN_PROGRESS:
 		if(roomTemp <= (userSettings.setTemperature - DEFAULT_TEMPERATURE_HYSTERESIS)) {
-			currentStatus = HEATING_IN_PROGRESS;
+			currentStatus = eCurrentStatus::HEATING_IN_PROGRESS;
 		}
 		else {
-			currentStatus = COOLING_IN_PROGRESS;
+			currentStatus = eCurrentStatus::COOLING_IN_PROGRESS;
 		}
-	}
-	else {
+		break;
+	case eCurrentStatus::HEATING_IN_PROGRESS:
+		if(roomTemp >= (userSettings.setTemperature + DEFAULT_TEMPERATURE_HYSTERESIS)) {
+			currentStatus = eCurrentStatus::COOLING_IN_PROGRESS;
+		}
+		else {
+			currentStatus = eCurrentStatus::HEATING_IN_PROGRESS;
+		}
+		break;
+		
+	case eCurrentStatus::SYSTEM_OFF:
 		if(roomTemp > userSettings.setTemperature) {
-			currentStatus = COOLING_IN_PROGRESS;
+			currentStatus = eCurrentStatus::COOLING_IN_PROGRESS;
 		}
 		else if(roomTemp < userSettings.setTemperature) {
-			currentStatus = HEATING_IN_PROGRESS;
+			currentStatus = eCurrentStatus::HEATING_IN_PROGRESS;
 		}
 		else {
-			currentStatus = SYSTEM_OFF;
+			currentStatus = eCurrentStatus::SYSTEM_OFF;
+		}
+		break;
+		
+	default:
+		if(roomTemp > userSettings.setTemperature) {
+			currentStatus = eCurrentStatus::COOLING_IN_PROGRESS;
+		}
+		else if(roomTemp < userSettings.setTemperature) {
+			currentStatus = eCurrentStatus::HEATING_IN_PROGRESS;
+		}
+		else {
+			currentStatus = eCurrentStatus::SYSTEM_OFF;
 		}
 	}
 	

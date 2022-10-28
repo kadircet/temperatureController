@@ -2,20 +2,29 @@
 #define TEMPERATURE_CONTROLLER_H
 
 #include <iostream>
+#include <memory>
 #include "machine.h"
 #include "temperature_sensor.h"
 #include "fan_speed.h"
+
+using namespace std;
 
 struct stUserSettings {
   int setTemperature;
   uint16_t temperatureHysteresis;
 };
 
-class TemperatureController : public TemperatureSensor , public FanSpeed {
+class TemperatureController {
     public:
 
     //Default Constructor
-    TemperatureController(FanSpeed* const pFanSpeed, TemperatureSensor* const pTemperatureSensor) : temperatureSensor(pTemperatureSensor), fanSpeed(pFanSpeed) {
+    TemperatureController(const shared_ptr<FanSpeed> &pFanSpeed, const shared_ptr<TemperatureSensor> &pTemperatureSensor) : temperatureSensor(pTemperatureSensor), fanSpeed(pFanSpeed) {
+		if(temperatureSensor == nullptr){
+            throw std::invalid_argument("temperatureSensor must not be null");
+        }
+		if(fanSpeed == nullptr){
+            throw std::invalid_argument("fanSpeed must not be null");
+        }
         userSettings.setTemperature = DEFAULT_TEMPERATURE;
         userSettings.temperatureHysteresis = DEFAULT_TEMPERATURE_HYSTERESIS;
     }
@@ -75,11 +84,11 @@ class TemperatureController : public TemperatureSensor , public FanSpeed {
     virtual eCurrentStatus getCurrentStatus(void);
 
     private:
-      stUserSettings userSettings; 
-      TemperatureSensor* temperatureSensor;
-      FanSpeed* fanSpeed;
-      int roomTemp;
-      eCurrentStatus currentStatus;
+		stUserSettings userSettings;
+		shared_ptr<TemperatureSensor> temperatureSensor;
+		shared_ptr<FanSpeed> fanSpeed;
+		int roomTemp;
+		eCurrentStatus currentStatus;
 		
     protected:
 };

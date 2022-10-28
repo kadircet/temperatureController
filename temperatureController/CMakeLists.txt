@@ -3,19 +3,18 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 PROJECT(Air_Conditioner_Test VERSION 0.0)
 
 set(HDR
-	machine.h
-	fan_speed.h
-	mock_fan_speed.h
-	temperature_sensor.h
-	mock_temperature_sensor.h
-	temperature_controller.h
+	src/machine.h
+	src/fan_speed.h
+	src/temperature_sensor.h
+	src/temperature_controller.h
+	test/mock_temperature_controller.h
 )
 
 set(SRC
-	temperature_sensor.cpp
-	fan_speed.cpp
-	temperature_controller.cpp
-	temperature_controller_test.cc
+	src/temperature_sensor.cpp
+	src/fan_speed.cpp
+	src/temperature_controller.cpp
+	test/temperature_controller_test.cc
 )
 
 if(MSVC)
