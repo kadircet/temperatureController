@@ -5,12 +5,12 @@
 #include "gmock/gmock.h"
 #include "../src/temperature_sensor.h"
 
-class MockTemperatureSensor : public TemperatureSensor {
-    public:
-    MOCK_METHOD(bool, initSensor, (), (override));
-    //MOCK_METHOD(uint16_t, readSensor, (), (override));
+class MockTemperatureSensor {
+    public:	
+    MockTemperatureSensor(unique_ptr<TemperatureSensor> upTempS) : upTempSensor(move(upTempS)) {}
 
     private:
+    unique_ptr<TemperatureSensor> upTempSensor;
     protected:
 };
 

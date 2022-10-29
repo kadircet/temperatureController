@@ -56,7 +56,7 @@ void TemperatureController::controlFan(void) {
 		}
 	}
 	
-	fanSpeed->setFanSpeed(currentStatus, roomTemp, userSettings.setTemperature);
+	upFan->setFanSpeed(currentStatus, roomTemp, userSettings.setTemperature);
 }
 
 /*	Set Set Temperature
@@ -92,7 +92,7 @@ void TemperatureController::setRoomTemperature(int temp) {
 *	Reads the temperature sensor.
 */ 
 void TemperatureController::getRoomTemperature(void) {
-	roomTemp = temperatureSensor->readSensor();
+	roomTemp = upSensor->readSensor();
 }
  
 /*	Get Current Status

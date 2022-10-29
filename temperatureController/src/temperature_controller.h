@@ -18,22 +18,17 @@ class TemperatureController {
     public:
 
     //Default Constructor
-    TemperatureController(const shared_ptr<FanSpeed> &pFanSpeed, const shared_ptr<TemperatureSensor> &pTemperatureSensor) : temperatureSensor(pTemperatureSensor), fanSpeed(pFanSpeed) {
-		if(temperatureSensor == nullptr){
-            throw std::invalid_argument("temperatureSensor must not be null");
-        }
-		if(fanSpeed == nullptr){
-            throw std::invalid_argument("fanSpeed must not be null");
-        }
+    TemperatureController(unique_ptr<FanSpeed> upFanSpeed, unique_ptr<TemperatureSensor> upTemperatureSensor)
+		: upSensor(move(upTemperatureSensor)), upFan(move(upFanSpeed)) {
         userSettings.setTemperature = DEFAULT_TEMPERATURE;
         userSettings.temperatureHysteresis = DEFAULT_TEMPERATURE_HYSTERESIS;
     }
-
+/*
     //Destructor
     virtual ~TemperatureController() {
         ;
     }
-
+*/
     /**
      * @brief: Main Controller Algorithm
      * @param:
@@ -85,8 +80,8 @@ class TemperatureController {
 
     private:
 		stUserSettings userSettings;
-		shared_ptr<TemperatureSensor> temperatureSensor;
-		shared_ptr<FanSpeed> fanSpeed;
+		unique_ptr<FanSpeed> upFan;
+		unique_ptr<TemperatureSensor> upSensor;
 		int roomTemp;
 		eCurrentStatus currentStatus;
 		
