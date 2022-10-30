@@ -7,7 +7,8 @@ set(HDR
 	src/fan_speed.h
 	src/temperature_sensor.h
 	src/temperature_controller.h
-	test/mock_temperature_controller.h
+	test/mock_fan_speed.h
+	test/mock_temperature_sensor.h
 )
 
 set(SRC
