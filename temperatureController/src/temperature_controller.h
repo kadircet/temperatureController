@@ -19,7 +19,7 @@ class TemperatureController {
 
     //Default Constructor
     TemperatureController(unique_ptr<FanSpeed> upFanSpeed, unique_ptr<TemperatureSensor> upTemperatureSensor)
-		: upSensor(move(upTemperatureSensor)), upFan(move(upFanSpeed)) {
+		: upFan(move(upFanSpeed)), upSensor(move(upTemperatureSensor)) {
         userSettings.setTemperature = DEFAULT_TEMPERATURE;
         userSettings.temperatureHysteresis = DEFAULT_TEMPERATURE_HYSTERESIS;
     }

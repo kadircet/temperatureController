@@ -12,7 +12,8 @@ class MockFanSpeed {
     public:	
     MockFanSpeed(unique_ptr<FanSpeed> upFanS) : upFanSpeed(move(upFanS)) {}
 	
-    MOCK_METHOD(eFanSpeedSettings, getFanSpeed, ());
+    //MOCK_METHOD(void, setFanSpeed, (eCurrentStatus, int, int));
+    //MOCK_METHOD(eFanSpeedSettings, getFanSpeed, ());
 
     private:
     unique_ptr<FanSpeed> upFanSpeed;
