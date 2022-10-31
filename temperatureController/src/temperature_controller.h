@@ -23,12 +23,12 @@ class TemperatureController {
         userSettings.setTemperature = DEFAULT_TEMPERATURE;
         userSettings.temperatureHysteresis = DEFAULT_TEMPERATURE_HYSTERESIS;
     }
-/*
+
     //Destructor
     virtual ~TemperatureController() {
         ;
     }
-*/
+
     /**
      * @brief: Main Controller Algorithm
      * @param:

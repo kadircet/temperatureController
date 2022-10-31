@@ -8,14 +8,12 @@
 
 using namespace std;
 
-class MockTemperatureSensor {
+class MockTemperatureSensor : public TemperatureSensor {
     public:	
-    MockTemperatureSensor(unique_ptr<TemperatureSensor> upTempS) : upTempSensor(move(upTempS)) {}
 	
     //MOCK_METHOD(int, readSensor, ());
 
     private:
-    unique_ptr<TemperatureSensor> upTempSensor;
     protected:
 };
 

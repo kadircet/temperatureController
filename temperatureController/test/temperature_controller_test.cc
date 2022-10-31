@@ -18,8 +18,8 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureEqualsRoomTemperature_ThenReturnSys
     unique_ptr<FanSpeed> fanSpeed = make_unique<FanSpeed>();
     MockFanSpeed mockFan{move(fanSpeed)};
 	
-	TemperatureController homeTempController = TemperatureController(move(fanSpeed), move(tempSensor));
-	
+	TemperatureController homeTempController = TemperatureController(move(mockFan), move(mockSensor));
+
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
 	

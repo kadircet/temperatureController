@@ -8,15 +8,13 @@
 
 using namespace std;
 
-class MockFanSpeed {
+class MockFanSpeed : public FanSpeed {
     public:	
-    MockFanSpeed(unique_ptr<FanSpeed> upFanS) : upFanSpeed(move(upFanS)) {}
 	
     //MOCK_METHOD(void, setFanSpeed, (eCurrentStatus, int, int));
     //MOCK_METHOD(eFanSpeedSettings, getFanSpeed, ());
 
     private:
-    unique_ptr<FanSpeed> upFanSpeed;
     protected:
 };
 
