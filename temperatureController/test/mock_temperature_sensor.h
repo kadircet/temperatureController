@@ -2,13 +2,15 @@
 #define MOCK_TEMPERATURE_SENSOR_H
 
 #include <iostream>
+#include <memory>
 #include "gmock/gmock.h"
 #include "../src/temperature_sensor.h"
 
+using namespace std;
+
 class MockTemperatureSensor : public TemperatureSensor {
     public:
-    MOCK_METHOD(bool, initSensor, (), (override));
-    //MOCK_METHOD(uint16_t, readSensor, (), (override));
+    //MOCK_METHOD(int, readSensor, ());
 
     private:
     protected:

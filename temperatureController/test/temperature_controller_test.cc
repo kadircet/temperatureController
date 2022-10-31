@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "mock_temperature_controller.h"
-#include "mock_fan_speed.h"
-#include "mock_temperature_sensor.h"
+#include "../src/temperature_controller.h"
 #include "../src/machine.h"
+#include "../test/mock_fan_speed.h"
+#include "../test/mock_temperature_sensor.h"
 
 /*	Set Temperature
 *	Desired temperature coming from the user is controlled.
@@ -11,7 +11,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureIsBetweenMaxAndMin_ThenReturnDesire
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	int userTemp = 0;
 	
@@ -33,7 +33,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureAboveMax_ThenReturnMax) {
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	int userTemp = 0;
 	
@@ -47,7 +47,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureBelowMin_ThenReturnMin) {
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	int userTemp = 0;
 	
@@ -67,7 +67,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureEqualsRoomTemperature_ThenReturnSys
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -87,7 +87,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureHigherThanRoomTemperature_ThenRetur
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -135,7 +135,7 @@ TEST(Air_Conditioner_Test, WhenSetTemperatureLowerThanRoomTemperature_ThenReturn
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -180,7 +180,7 @@ TEST(Air_Conditioner_Test, WhenRoomTemperatureIncreasedContinuosly_ThenReturnCoo
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -233,7 +233,7 @@ TEST(Air_Conditioner_Test, WhenRoomTemperatureDecreasedContinuosly_ThenReturnHea
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -293,7 +293,7 @@ TEST(Air_Conditioner_Test, WhenRoomTemperatureChangesRandomly_ThenCheckStatus) {
     shared_ptr<MockTemperatureSensor> pTemperatureSensor(new MockTemperatureSensor());
     shared_ptr<MockFanSpeed> pFanSpeed(new MockFanSpeed());
 	
-	MockTemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
+	TemperatureController homeTempController(pFanSpeed, pTemperatureSensor);
 	
 	eFanSpeedSettings readFanSpeed = eFanSpeedSettings::eFAN_SPEED_OFF;
 	eCurrentStatus currentStatus = eCurrentStatus::SYSTEM_OFF;
@@ -380,5 +380,4 @@ TEST(Air_Conditioner_Test, WhenRoomTemperatureChangesRandomly_ThenCheckStatus) {
 	
 	currentStatus = homeTempController.getCurrentStatus();
 	EXPECT_EQ(eCurrentStatus::COOLING_IN_PROGRESS, currentStatus);
-	
 }
